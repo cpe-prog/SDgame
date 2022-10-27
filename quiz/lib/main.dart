@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,11 +41,31 @@ class splash extends StatefulWidget {
 
   @override
   State<splash> createState() => _splashState();
+
+
 }
 
 class _splashState extends State<splash> {
+
+
+@override
+void initState(){
+  super.initState();
+  Timer(Duration(seconds: 3),(){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context)=> login(),
+    ));
+  });
+}
+
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(child: Image.asset(
+        'asset/icon.png'
+      ),),
+    );
   }
 }

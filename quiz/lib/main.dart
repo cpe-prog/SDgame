@@ -1,16 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+Future <void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
 
-  final Future<Firebase> _fbApp = firebase.initializeApp();
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
 
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,13 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(future: _fbApp, 
       builder: ((context, snapshot) {
         if(snapshot.hasError){
-          return Text("Something went's wrong!");
+          return const Text("Something went's wrong!");
         }
         else if(snapshot.hasData){
-          return splash()
+          return const splash();
         }
         else {
-          return Center(child: CircularProgressIndicator(),);
+          return const Center(child: CircularProgressIndicator(),);
         }
 
 
@@ -51,7 +53,7 @@ class _splashState extends State<splash> {
 @override
 void initState(){
   super.initState();
-  Timer(Duration(seconds: 3),(){
+  Timer(const Duration(seconds: 3),(){
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context)=> login(),
     ));

@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'login.dart';
+import 'package:quiz/login.dart';
 
 Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ignore: camel_case_types
 class splash extends StatefulWidget {
   const splash({super.key});
 
@@ -50,7 +48,6 @@ class splash extends StatefulWidget {
 
 }
 
-// ignore: camel_case_types
 class _splashState extends State<splash> {
 
 
@@ -59,7 +56,7 @@ void initState(){
   super.initState();
   Timer(const Duration(seconds: 3),(){
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context)=> const login(),
+      builder: (context)=> login(),
     ));
   });
 }

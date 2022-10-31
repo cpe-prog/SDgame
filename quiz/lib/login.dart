@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: unused_import
 import 'package:firebase_core/firebase_core.dart';
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class login extends StatefulWidget {
   const login({ Key? key }) : super (key: key);
@@ -13,7 +16,6 @@ class login extends StatefulWidget {
 }
 
   class _loginState extends StatefulWidget {
-  
     @override
     Widget build(BuildContext context ) {
       return Scaffold(
@@ -59,8 +61,41 @@ class login extends StatefulWidget {
     }
 
   void checkinternetconnection() async{
-    var result = await Connectivity().ch
+    var result = await Connectivity().checkConnectivity();
+    if(result == ConnectivityResult.none){
+      _showDialog("NO internet", "You're connected over mobile data");
+    }
+    else if(result == ConnectivityResult.mobile){
+      _showDialog(" internet", "You're connected over mobile data");
+      Navigator.push(context, MaterialPageRoute(builder: (_) => accurll()));
+    }
+    else if(result == ConnectivityResult.wifi){
+      _showDialog("internet", "You're connected over mobile data");
+      Navigator.push(context, MaterialPageRoute(builder: (_) => accurll()));
+    }
+  }
+  _showDialog(title, text){
+
+    showDialog(
+      context: context,
+      builder: context){
+
+        return AlertDialog(
+          title: text(title),
+          content: text(text),
+          actions: <Widget>[
+            hintbutton(onPressed:(){
+              Navigator.of(context).pop();
+            },
+            child: text('ok')
+            )
+          ],
+        );
+
+      }
+
   }
 
-
   }
+
+  
